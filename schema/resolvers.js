@@ -1,28 +1,26 @@
-const links = [
-  {
-    id: 1,
-    url: 'http://graphql.org/',
-    description: 'The Best Query Language'
-  },
-  {
-    id: 2,
-    url: 'http://dev.apollodata.com',
-    description: 'Awesome GraphQL Client'
-  },
-];
+const Link = require('./../models/Link');
+const User = require('./../models/User');
 
 const resolvers = {
   Query: {
-    allLinks: () => links,
+    allLinks: () => Link.query().eager('users'),
+    allUsers: () => User.query(),
   },
   Mutation: {
     createLink: (_, params) => {
-      const newLink = {
-        id: links.length + 1,
-        ...params.link
-      }
-      links.push(newLink);
-      return newLink;
+      return Link.query().insert(params.link)
+    },
+    updateLink: (_, params) => {
+      return Link.query().patchAndFetchById(params.id, params.link)
+    },
+    deleteLink: (_, params) => {
+      return Link
+      .query()
+      .findById(params.id)
+      .then((link) => {
+        return Link.query().deleteById(params.id)
+        .then(() => link);
+      })
     }
   },
 };

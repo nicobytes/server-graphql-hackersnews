@@ -1,15 +1,20 @@
 const LinkDef = `
 # Representa un link
 type Link {
-  # Es el id unico
   id: ID!
   url: String!
   description: String!
+  postedBy: User
 }
 
 input newLink{
   url: String!
   description: String!
+}
+
+input updateLink{
+  url: String
+  description: String
 }
 `;
 

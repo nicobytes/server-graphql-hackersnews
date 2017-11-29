@@ -8,17 +8,20 @@ exports.seed = function(knex, Promise) {
         {
           id: 1,
           url: 'http://graphql.org/',
-          description: 'The Best Query Language'
+          description: 'The Best Query Language',
+          postedBy: 1
         },
         {
           id: 2,
           url: 'http://dev.apollodata.com',
-          description: 'Awesome GraphQL Client'
+          description: 'Awesome GraphQL Client',
+          postedBy: 1
         },
         {
           id: 3,
           url: 'http://devode.la',
-          description: 'Devcode'
+          description: 'Devcode',
+          postedBy: 1
         },
       ]);
     });
