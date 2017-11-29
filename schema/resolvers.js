@@ -15,6 +15,16 @@ const resolvers = {
   Query: {
     allLinks: () => links,
   },
+  Mutation: {
+    createLink: (_, params) => {
+      const newLink = {
+        id: links.length + 1,
+        ...params.link
+      }
+      links.push(newLink);
+      return newLink;
+    }
+  },
 };
 
 module.exports = resolvers;
