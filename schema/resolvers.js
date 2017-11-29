@@ -3,12 +3,12 @@ const User = require('./../models/User');
 
 const resolvers = {
   Query: {
-    allLinks: () => Link.query().eager('users'),
-    allUsers: () => User.query(),
+    allLinks: () => Link.query().eager('postedBy'),
+    allUsers: () => User.query().eager('links'),
   },
   Mutation: {
     createLink: (_, params) => {
-      return Link.query().insert(params.link)
+      return Link.query().eager('postedBy').insert(params.link)
     },
     updateLink: (_, params) => {
       return Link.query().patchAndFetchById(params.id, params.link)
@@ -21,7 +21,10 @@ const resolvers = {
         return Link.query().deleteById(params.id)
         .then(() => link);
       })
-    }
+    },
+    createUser: (_, params) => {
+      return User.query().insert(params.user)
+    },
   },
 };
 

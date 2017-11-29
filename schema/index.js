@@ -1,8 +1,8 @@
 const { makeExecutableSchema } = require('graphql-tools');
 const resolvers = require('./resolvers');
 
-const LinkDef = require('./Link');
-const UserDef = require('./User');
+const LinkDef = require('./entities/Link');
+const UserDef = require('./entities/User');
 
 const rootQuery = `
 type Query {
@@ -13,6 +13,7 @@ type Mutation {
   createLink(link: newLink): Link
   updateLink(id: Int!, link: updateLink): Link
   deleteLink(id: Int!): Link
+  createUser(user: newUser): User
 }
 `
 
