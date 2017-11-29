@@ -9,7 +9,9 @@ const PORT = 4200;
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress()
+  graphqlExpress({
+    schema: ''
+  })
 );
 
 app.use(
